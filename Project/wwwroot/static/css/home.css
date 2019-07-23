@@ -1,0 +1,211 @@
+header{
+    border-bottom: 1px solid lightgray;
+}
+
+footer{
+    background-color: black;
+}
+
+.tableholder{
+    margin: 0 10px;
+}
+
+#buttonholder{
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    bottom: 0;
+    z-index: 99999999;
+    width: 100%;
+    background-color: rgba(211, 211, 211, 0.2);
+    height: 70px;
+}
+.btn{
+    margin: 10px;
+    width: 145px;
+}
+
+.btn + .btn{
+    margin-left: 30px;
+}
+
+.save{
+    background-color: #8FCB85 !important;
+    color: white !important;
+}
+
+.save:hover{
+    background-color: #33C13C !important;
+}
+
+input[readonly].form-control{
+    width: 10%;
+    background-color:transparent;
+    font-size: 1em;
+}
+
+tr:hover {background-color: #F5E3C5 !important;}
+
+th{
+    text-align: center;
+    background-color: #FF8800;
+    color: white;
+}
+.center{
+    display: flex;
+    align-items: center;
+}
+
+.center .ct{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+.iconholder{
+    display: flex;
+    align-items: center;
+    margin-right: 10%;
+}
+
+.iconholder .logout{
+    margin-left: 25px;
+}
+.iconholder div .btn{
+    padding: 10px;
+    width: 100px;
+    font-size: 14px;
+}
+
+h1, h4{
+    font-family: 'Exo', sans-serif;
+}
+
+.hicon{
+    margin: 20px;
+    width: 40px;
+    height: 40px;
+}
+
+.logo{
+    /*display: inline-block;*/
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 10%;
+    height: 60px;
+    z-index: 100;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 230px;
+    max-height: 195px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {background-color: #ddd;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.email{
+    text-align: center;
+}
+
+.email input[type='button']{
+    padding: 7px;
+}
+
+.email input[type='text']{
+    width: 90%;
+    heigth: 30px;
+}
+
+.notifications a{
+    border-bottom: 1px solid #D4D1CD;
+}
+
+.dot {
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  border: 0.3px solid #D4D1CD;
+  display: inline-block;
+}
+
+.app .dot{
+  background-color: green;
+}
+
+.napp .dot{
+  background-color: red;
+}
+
+.dot:after {
+    content: "\00a0";
+}
+
+td, th{
+    text-align: center;
+    vertical-align: middle !important;
+}
+/* footer */
+footer{
+    height: 70px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+footer .ft{
+    margin-right: 40px;
+}
+
+footer p{
+    font-size: 16px;
+    margin-bottom: 0px !important;
+}
+/* endfooter */
+
+/* buttons */
+.srcont{
+  display: flex;
+  justify-content: center;
+}
+.tdbutton{
+    background-color: #F3F0F0;
+    font-size: 14px;
+    padding: 5px 10px;
+    border-radius: 12px;
+}
+/* endbuttons */
+
+.wedit{
+    width: 100%;
+}
+
+.badge {
+  display: none;
+  padding: 4px 7px;
+  position: absolute;
+  top: 50px;
+  right: 8px;
+  border-radius: 50%;
+  border: 0.3px solid #D4D1CD;
+  background: red;
+  color: white;
+}

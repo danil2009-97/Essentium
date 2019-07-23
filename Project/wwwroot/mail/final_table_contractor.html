@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Contractor</title>
+    <link rel="stylesheet" href="../static/bootstrap/dist/css/bootstrap.min.css">
+    <script src="../static/jquery/dist/jquery.min.js"></script>
+    <script src="../static/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../static/scripts/fncs.js" defer></script>
+    <link rel="stylesheet" type="text/css" href="../static/css/home.css">
+</head>
+<body>
+    <div class="tableholder">
+        <table class="table table-striped table-bordered" id='timesheet' border="1">
+            <thead>
+                <th>Day</th>
+                <th>Date</th>
+                <th>Billable Hours</th>
+                <th>Sick Days</th>
+                <th>Holidays</th>
+                <th>Time Off</th>
+                <th>Special Leave</th>
+                <th>Extra Additional KMs' for Contractor</th>
+                <th>Comments</th>
+            </thead>
+            <tbody id="tablebody"></tbody>
+        </table>
+    </div>
+
+    <script>
+      $.ajax({
+          type: 'GET',
+          url: 'http://localhost:5000/api/Account/???',
+          dataType: "json",
+          contentType: "application/json; charset=utf-8",
+          success: function (data) {
+              appendRows(??, ??, 9)
+              insertData(data, 9);
+          }
+      });
+    </script>
+</body>
+</html>

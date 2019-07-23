@@ -1,0 +1,13 @@
+.space{
+    /* background: #ff7e02; */
+    background: black;
+}
+
+.central{
+  top: 20%;
+  bottom: 20%;
+}
+
+.reg{
+  margin-left: 7px !important;
+}

@@ -1,0 +1,129 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="static/bootstrap/dist/css/bootstrap.min.css">
+    <script src="static/jquery/dist/jquery.min.js"></script>
+    <script src="static/bootstrap/dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="static/css/login.css">
+    <link rel="stylesheet" type="text/css" href="static/css/registration.css">
+</head>
+<body>
+    <div class="main">
+      <div class="space head"></div>
+      <div class="central">
+          <div class="half left">
+            <div class="filler"></div>
+          </div>
+          <div class="half right">
+            <h1>Register</h1><br>
+            <form>
+              <div class="form-group form-inline">
+                <label for="login">Login</label>
+                <input id="login" name="login" type="text" class="form-control reg" placeholder="Enter Login">
+              </div>
+              <div class="form-group form-inline">
+                <label for="password">Password</label>
+                <input id="password" type="password" class="form-control reg" placeholder="Enter Password">
+              </div>
+              <div class="form-group form-inline">
+                <label for="name">Name</label>
+                <input id="name" type="text" class="form-control reg" placeholder="Enter Name">
+              </div>
+              <div class="form-group form-inline">
+                <label for="surname">Surname</label>
+                <input id="surname" type="text" class="form-control reg" placeholder="Enter Surname">
+              </div>
+              <div class="form-group form-inline">
+                <label for="manem">Manager Email</label>
+                <input id="manem" type="text" class="form-control reg" placeholder="Enter Manager Email">
+              </div>
+              <div class="form-group form-inline">
+                <label for="contractor">Contractor</label>
+                <input id="contractor" type="checkbox" class="reg">
+              </div>
+              <br>
+              <button class="btn btn-primary" id="register">Save</button>
+            </form>
+          </div>
+      </div>
+      <div class="space foot"></div>
+      <div id="myModal" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+        </div>
+      </div>
+    </div>
+    <script>
+        $('#register').click(function (e) {
+            e.preventDefault();
+            let login = $('#login').val();
+            let password = $('#password').val();
+            let name = $('#name').val();
+            let surname = $('#surname').val();
+            let manem = $('#manem').val();
+            let contractor = $('#contractor').is(':checked');
+            $.ajax(
+                {
+                    type: 'POST',
+                    url: 'http://localhost:5000/api/register',
+                    contentType: "application/json; charset=utf-8",
+                    data: `{ "login": "${login}", "password": "${password}",
+                            "name": "${name}",
+                            "surname": "${surname}",
+                            "managerEmail": "${manem}",
+                            "is_Contractor": "${contractor}"
+                            }`,
+                    success: function (data, textStatus) {
+                        popModal(0);
+                        localStorage.setItem("token", data);
+                        document.location.href = "login.html";
+                    },
+                    error: function(response){
+                        popModal(1, response.status);
+                    }
+                });
+        });
+
+        $('.lgn').click(function(e){
+          e.preventDefault();
+          document.location.href = "login.html";
+        });
+    </script>
+    <script>
+        function popModal(val, error){
+            let modal = $("#myModal");
+            modal.css('display', 'block');
+            let modalContent = $(".modal-content")[0];
+            $('.mdinf').remove();
+            let p = document.createElement('p');
+            p.className = 'mdinf';
+            if (val == 0){
+              p.innerText = 'Registration complete!'
+              let lg = document.createElement('button');
+              lg.innerText = "Login";
+              lg.className = 'btn btn-primary mdinf lgn';
+              modalContent.appendChild(p);
+              modalContent.appendChild(lg);
+            }
+            else {
+              p.innerText = `Error ${error} occured, please try again.`;
+              modalContent.appendChild(p);
+            }
+        }
+
+        let modal = document.getElementById("myModal");
+        let span = document.getElementsByClassName("close")[0];
+        span.onclick = function() {
+          modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+          if (event.target == modal) {
+          modal.style.display = "none";
+          }
+        }
+    </script>
+    </body>
+</html>

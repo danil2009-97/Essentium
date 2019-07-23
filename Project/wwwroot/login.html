@@ -1,0 +1,104 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="static/bootstrap/dist/css/bootstrap.min.css">
+    <script src="static/jquery/dist/jquery.min.js"></script>
+    <script src="static/bootstrap/dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="static/css/login.css">
+    <script>
+        if (localStorage.getItem("token") != null) {
+            if (JSON.parse(atob(localStorage.getItem('token').split('.')[1])).is_contractor == "True")
+                            document.location.href = "contractor.html";
+                        else
+                            document.location.href = "worker.html";
+        }
+    </script>
+</head>
+<body>
+    <div class="main">
+      <div class="space head">
+      </div>
+      <div class="central">
+          <div class="half left">
+            <div class="filler"></div>
+          </div>
+          <div class="half right">
+            <h1>Welcome to Login Page</h1><br><br>
+            <form>
+              <div class="form-group">
+                <label for="login">Login</label>
+                <input id="login" name="login" type="text" class="form-control" placeholder="Enter Login">
+              </div>
+              <div class="form-group">
+                <label for="password">Password</label>
+                <input id="password" type="password" class="form-control" placeholder="Enter Password">
+              </div><br><br>
+              <button class="btn btn-primary" id="enter">Login</button>
+              <button class="btn btn-primary" id="register">Registration</button>
+            </form>
+          </div>
+      </div>
+      <div class="space foot"></div>
+      <div id="myModal" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+        </div>
+      </div>
+    </div>
+    <script>
+        $('#register').click(function (e) {
+            e.preventDefault();
+            document.location.href = "register.html";
+        });
+
+        $('#enter').click(function (e) {
+            e.preventDefault();
+            let login = $('#login').val();
+            let password = $('#password').val();
+            $.ajax(
+                {
+                    type: 'POST',
+                    url: 'http://localhost:5000/api/login',
+                    contentType: "application/json; charset=utf-8",
+                    data: `{ "login": "${login}", "password": "${password}" }`,
+                    success: function (data, textStatus) {
+                        localStorage.setItem("token", data);
+                        if (JSON.parse(atob(localStorage.getItem('token').split('.')[1])).is_contractor == "True")
+                            document.location.href = "contractor.html";
+                        else
+                            document.location.href = "worker.html";
+                    },
+                    error: function(response){
+                        popModalLogin(response.status);
+                    }
+                });
+        });
+    </script>
+    <script>
+        function popModalLogin(error){
+            let modal = $("#myModal");
+            modal.css('display', 'block');
+            let modalContent = $(".modal-content")[0];
+            $('.mdinf').remove();
+            let p = document.createElement('p');
+            p.className = 'mdinf';
+            p.innerText = `Error ${error} occured, please try again.`;
+            modalContent.appendChild(p);
+        }
+
+        let modal = document.getElementById("myModal");
+        let span = document.getElementsByClassName("close")[0];
+        span.onclick = function() {
+          modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+          if (event.target == modal) {
+            modal.style.display = "none";
+          }
+        }
+    </script>
+</body>
+</html>
